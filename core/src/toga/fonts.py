@@ -5,7 +5,7 @@ from pathlib import Path
 # Use the Travertino font definitions as-is
 from travertino import constants
 from travertino.constants import (
-    BOLD,
+    FONT_STYLES, FONT_VARIANTS, FONT_WEIGHTS, BOLD,
     CURSIVE,
     FANTASY,
     ITALIC,
@@ -99,11 +99,9 @@ class Font(BaseFont):
         style: str,
         variant: str,
     ) -> tuple[str, str, str, str]:
-        if weight not in constants.FONT_WEIGHTS:
-            weight = NORMAL
-        if style not in constants.FONT_STYLES:
-            style = NORMAL
-        if variant not in constants.FONT_VARIANTS:
-            variant = NORMAL
-
-        return family, weight, style, variant
+        return (
+            family,
+            weight if weight in FONT_WEIGHTS else NORMAL,
+            style if style in FONT_STYLES else NORMAL,
+            variant if variant in FONT_VARIANTS else NORMAL,
+        )
